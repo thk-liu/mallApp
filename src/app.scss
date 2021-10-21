@@ -1,0 +1,20 @@
+body {
+  height: 100vh;
+  overflow: auto;
+  background: #f7f8fa;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+}
+
+page {
+  background: #f7f8fa;
+}
+
+.taro_router {
+  .taro_page {
+    min-height: 100vh;
+  }
+}
