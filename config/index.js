@@ -1,4 +1,10 @@
+/* eslint-disable import/no-commonjs */
+const path = require('path')
+
 const config = {
+  alias: {
+    '@': path.resolve(__dirname, '..', 'src'),
+  },
   projectName: "mallApp",
   date: "2021-10-19",
   designWidth: 750,
@@ -10,6 +16,12 @@ const config = {
   sourceRoot: "src",
   outputRoot: "dist",
   plugins: [],
+  sass: {
+    resource: [
+      path.resolve(__dirname, '..', 'src/var.scss')
+    ],
+    projectDirectory: path.resolve(__dirname, '..'),
+  },
   defineConstants: {},
   copy: {
     patterns: [],

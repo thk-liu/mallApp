@@ -1,5 +1,6 @@
 import { Component } from 'react'
-import { View, Button, Text } from '@tarojs/components'
+import Taro from '@tarojs/taro'
+import { View, Button, Text, Navigator } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 
 import './index.scss'
@@ -54,6 +55,10 @@ class Index extends Component {
         <Button onClick={this.increment}>+</Button>
         <Button onClick={this.decrement}>-</Button>
         <Button onClick={this.incrementAsync}>Add Async</Button>
+        <Navigator url='/pages/authorize/index'>
+          authorize
+        </Navigator>
+
         <Text>{counter}</Text>
       </View>
     )

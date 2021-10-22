@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Taro from '@tarojs/taro'
 import { Provider } from 'mobx-react'
 
 import counterStore from './store/counter'
@@ -12,7 +13,7 @@ const store = {
 
 class App extends Component {
   componentDidMount() {
-    autoLogin()
+    // autoLogin()
   }
 
   componentDidShow() { }
