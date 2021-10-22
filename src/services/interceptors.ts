@@ -1,4 +1,5 @@
 import Taro from "@tarojs/taro"
+import options from "./options";
 
 const HTTP_STATUS = {
     SUCCESS: 200,
@@ -12,6 +13,13 @@ const HTTP_STATUS = {
     BAD_GATEWAY: 502,
     SERVICE_UNAVAILABLE: 503,
     GATEWAY_TIMEOUT: 504
+}
+
+const requestInterceptor = (chain) => {
+    const requestParams = chain.requestParams;
+    if (options.Tenant) {
+        
+    }
 }
 
 const defaultInterceptor = (chain) => {
@@ -28,13 +36,13 @@ const defaultInterceptor = (chain) => {
             return Promise.reject("服务端出现了问题")
 
         } else if (res.statusCode === HTTP_STATUS.FORBIDDEN) {
-            Taro.setStorageSync("Authorization", "")
+            Taro.setStorageSync("Access-Token", "")
 
             // TODO 根据自身业务修改
             return Promise.reject("没有权限访问");
 
         } else if (res.statusCode === HTTP_STATUS.AUTHENTICATE) {
-            Taro.setStorageSync("Authorization", "")
+            Taro.setStorageSync("Access-Token", "")
 
             return Promise.reject("需要鉴权")
 
@@ -47,6 +55,7 @@ const defaultInterceptor = (chain) => {
 // Taro 提供了两个内置拦截器
 // logInterceptor - 用于打印请求的相关信息
 // timeoutInterceptor - 在请求超时时抛出错误。
-const interceptors = [defaultInterceptor, Taro.interceptors.logInterceptor]
+// const interceptors = [defaultInterceptor, Taro.interceptors.logInterceptor]
+const interceptors = [defaultInterceptor]
 
 export default interceptors

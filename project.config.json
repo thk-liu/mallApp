@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "mallApp",
   "description": "B2C商城应用",
-  "appid": "touristappid",
+  "appid": "wx06b8f0d56a584e45",
   "setting": {
     "urlCheck": true,
     "es6": false,

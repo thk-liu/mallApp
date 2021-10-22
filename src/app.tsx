@@ -4,13 +4,16 @@ import { Provider } from 'mobx-react'
 import counterStore from './store/counter'
 
 import './app.scss'
+import { autoLogin } from './services/user/wechat-login'
 
 const store = {
   counterStore
 }
 
 class App extends Component {
-  componentDidMount() { }
+  componentDidMount() {
+    autoLogin()
+  }
 
   componentDidShow() { }
 
