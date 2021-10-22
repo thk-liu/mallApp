@@ -20,7 +20,7 @@ const Login = () => {
 
     return (
         <View className='container'>
-            <Toast open={agreeOpen} position="top" onClose={() => setAgreeOpen(false)}>请阅读并同意 用户协议和 隐私条款</Toast>
+            <Toast open={agreeOpen} position='top' onClose={() => setAgreeOpen(false)}>请阅读并同意 用户协议和 隐私条款</Toast>
 
             <View className='userAvatar-container '>
                 <View className='userAvatar'>
@@ -32,11 +32,11 @@ const Login = () => {
                 请阅读并同意 用户协议 和 隐私条款
             </View>
 
-            <View className="wechat-phone-login">
-                <Button block color="primary" onClick={wechatPhoneLogin}>微信手机号快捷登录</Button>
+            <View className='wechat-phone-login'>
+                <Button block color='primary' onClick={wechatPhoneLogin}>微信手机号快捷登录</Button>
             </View>
 
-            <Navigator className="other-phone-login" url='/pages/authorize/index'>
+            <Navigator className='other-phone-login' url='/pages/bind/index'>
                 使用其他手机号登录
             </Navigator>
         </View>
