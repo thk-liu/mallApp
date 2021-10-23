@@ -3,13 +3,13 @@ import { Button } from "@taroify/core"
 
 type CountDownButton = {
     duration?: number,
-    sender: () => Promise<void>
+    verification: () => boolean
 }
 
 export default (props: CountDownButton) => {
     const [disabled, setDisabled] = useState<boolean>(false);
     const [text, setText] = useState<string>('发送短信');
-    const { duration, sender } = props;
+    const { duration, verification } = props;
 
     const countDown = () => {
         setDisabled(true);
@@ -26,5 +26,5 @@ export default (props: CountDownButton) => {
         }, 1000);
     }
     return (
-        <Button disabled={disabled} color={disabled ? 'default' : 'primary'} size='small' onClick={() => sender().then(() => countDown())}> {text}</Button >)
+        <Button disabled={disabled} color={disabled ? 'default' : 'primary'} size='small' onClick={() => verification() && countDown()}> {text}</Button >)
 }

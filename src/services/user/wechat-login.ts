@@ -22,7 +22,13 @@ function getWeChatSession() {
                         url: `${options.SSO_AUTHORITY}/account/WeChatMiniLogin/${res.code}`,
                         method: "GET",
                         header,
-                        success: (response) => resolve(response.data),
+                        success: (response) => {
+                            console.log(response);
+                            if (response.data.error) {
+                                return reject(response.data.error)
+                            }
+                            return resolve(response.data)
+                        },
                         fail: (err) => reject(err.errMsg)
                     })
                 } else {
@@ -49,14 +55,17 @@ const AccessToken = 'Access-Token';
  * @returns 
  */
 function loginByCode2SessionResponse(session: Code2SessionResponse) {
+    if (!session.openId) { }
+    return connectToken({ grant_type: 'WeChatMiniProgram_credentials', openid: session.openId })
+}
+
+function connectToken(params: any) {
     return new Promise((resolve, reject) => {
-        if (!session.openId) { }
         const formData = {
-            grant_type: 'WeChatMiniProgram_credentials',
             scope: options.SSO_SCOPE,
             client_id: options.SSO_CLIENT_ID,
             client_secret: '1q2w3e*',
-            openid: session.openId
+            ...params
         }
         const header = {
             'content-type': 'application/x-www-form-urlencoded',
@@ -70,6 +79,10 @@ function loginByCode2SessionResponse(session: Code2SessionResponse) {
             data: formData,
             header,
             success: (response) => {
+                console.log(response);
+                if (response.data.error) {
+                    return reject(response.data)
+                }
                 Taro.setStorageSync(AccessToken, response.data.access_token)
                 resolve(response.data.access_token)
             },
@@ -78,7 +91,11 @@ function loginByCode2SessionResponse(session: Code2SessionResponse) {
                 reject(err);
             }
         })
-    })
+    });
+}
+
+function loginByPhoneNumberAndCode(phoneNumber: string, code: string) {
+    return connectToken({ grant_type: 'PhoneNumber', phoneNumber, code }).then(() => Promise.resolve(getApplicationConfiguration()))
 }
 
 function getApplicationConfiguration() {
@@ -88,6 +105,22 @@ function getApplicationConfiguration() {
             console.log('用户校验已过需重新登录')
         }
     })
+}
+
+function sendPhoneCode(phoneNumber: string) {
+    const header = {}
+    if (options.Tenant) {
+        header['__tenant'] = options.Tenant;
+    }
+    return new Promise((resolve, reject) => {
+        Taro.request({
+            url: `${options.SSO_AUTHORITY}/account/sms-login/sender/${phoneNumber}`,
+            method: "GET",
+            success: (response) => resolve(response.data),
+            fail: (err) => reject(err.errMsg)
+        })
+    })
+
 }
 
 function autoLogin() {
@@ -101,5 +134,5 @@ function autoLogin() {
 }
 
 export {
-    autoLogin
+    autoLogin, sendPhoneCode, loginByPhoneNumberAndCode, loginByCode2SessionResponse
 }
