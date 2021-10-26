@@ -1300,22 +1300,22 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@taroify/core@^0.0.15-alpha.5":
-  version "0.0.15-alpha.5"
-  resolved "https://registry.npmjs.org/@taroify/core/-/core-0.0.15-alpha.5.tgz#f5992c203d8f33d8896bb10440530edccd747148"
-  integrity sha512-POWuoOWvhgBtRBz+tPSoPa5rTX7nK2L9FHPn6602S6aCdwzTs0UGiL1O8/kGiNtDyqQPnF646939OYCHCO3GjQ==
+"@taroify/core@^0.0.15-alpha.11":
+  version "0.0.15-alpha.11"
+  resolved "https://registry.yarnpkg.com/@taroify/core/-/core-0.0.15-alpha.11.tgz#149961438c9e922566f8cbccc51a5e3faf7903ee"
+  integrity sha512-JxtZNb8U1Dhi4NV44KFr6UVVVKP9kqPSpDZqRsSZgn3Dyr7sIMdjNIdEO3zO1Sysoyhar5H8FXHl8LZ84qEk5A==
   dependencies:
-    "@taroify/icons" "^0.0.15-alpha.5"
+    "@taroify/icons" "^0.0.15-alpha.11"
     classnames "^2.2.6"
     lodash "^4.17.21"
     raf "^3.4.1"
     react-is "^17.0.2"
     react-transition-group "^4.4.1"
 
-"@taroify/icons@^0.0.15-alpha.5":
-  version "0.0.15-alpha.5"
-  resolved "https://registry.npmjs.org/@taroify/icons/-/icons-0.0.15-alpha.5.tgz#98370035f13e77e72e6c85b6cf8a2bd220fe37a9"
-  integrity sha512-MBD38w9af8bZNXOPqP+3jlO9wOjOGTck92V6VFB0pMNRiDE/L4Csn4mwg2smTFEKpIVw76bho39YBXUza9cSiw==
+"@taroify/icons@^0.0.15-alpha.11":
+  version "0.0.15-alpha.11"
+  resolved "https://registry.yarnpkg.com/@taroify/icons/-/icons-0.0.15-alpha.11.tgz#152d97ea0c66fcdd75ec9ea1f14a0b634810c094"
+  integrity sha512-oqEa40mHnnDszP+2kdCdLsqxz1J4S2hbuYadEtbuaimgQjQytuDVVxtH/azhAw7uDT64HoIPBDySUCFhi8pzsw==
   dependencies:
     classnames "^2.2.6"
 
