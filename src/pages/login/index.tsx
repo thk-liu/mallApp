@@ -3,19 +3,56 @@ import Taro from '@tarojs/taro'
 import { View, Text, Navigator, OpenData } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
 import { Checkbox, Button, Toast } from "@taroify/core"
-
-
+import request from '@/services/request'
+import { login, encryptPhone, registerByOpenIdAndPhone } from '@/services/wechat'
+import { getApplicationConfiguration } from '@/services/app/applicationconfiguration'
+import { loginByOpenId } from '@/services/app/login'
 import './index.scss'
+import { Code2SessionResponse } from '@/services/wechat/data'
+import { loginByPhoneNumberAndOpenId } from '@/services/app/login'
 
 const Login = () => {
 
     const [agree, setAgree] = useState<boolean>(false);
     const [agreeOpen, setAgreeOpen] = useState<boolean>(false);
 
-    const wechatPhoneLogin = () => {
+    const wechatPhoneLogin = (e) => {
+        if (e.detail.errMsg === 'getPhoneNumber:ok') {
+            login().then((res: Code2SessionResponse) => {
+                encryptPhone({
+                    iv: e.detail.iv,
+                    encryptedData: e.detail.encryptedData,
+                    sessionKey: res.sessionKey
+                }).then(phoneNumber => {
+                    loginByPhoneNumberAndOpenId(phoneNumber, res.openid).then(() => {
+                        Taro.switchTab({
+                            url: '/pages/index/index'
+                        })
+                    })
+                    // registerByOpenIdAndPhone({ openId: res.openid, phoneNumber }).then(() => {
+
+                    //     loginByOpenId(res.openid).then(() => {
+                    //         getApplicationConfiguration().then(res => {
+                    //             Taro.switchTab({
+                    //                 url: '/pages/home/index'
+                    //             })
+                    //         })
+                    //     })
+                    // })
+                })
+            })
+
+        } else {
+            console.log(e.detail.errMsg);
+            return;
+        }
+
         if (!agree) {
             setAgreeOpen(true);
+            return;
         }
+
+
     }
 
     return (
@@ -33,7 +70,7 @@ const Login = () => {
             </View>
 
             <View className='wechat-phone-login'>
-                <Button block color='primary' onClick={wechatPhoneLogin}>微信手机号快捷登录</Button>
+                <Button block color='primary' openType='getPhoneNumber' onGetPhoneNumber={wechatPhoneLogin}>微信手机号快捷登录</Button>
             </View>
 
             <Navigator className='other-phone-login' url='/pages/bind/index'>
