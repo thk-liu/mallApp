@@ -2,7 +2,7 @@
 
 import Taro, { request } from "@tarojs/taro";
 import options from '../options'
-import { Code2SessionResponse } from "./data";
+import { Code2SessionResponse, EncryptPhoneInput, RegisterByOpenIdAndPhoneInput, RegisterResponse } from "./data";
 
 let wechatSession: Code2SessionResponse={
     openId: "",

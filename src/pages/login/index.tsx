@@ -24,21 +24,11 @@ const Login = () => {
                     encryptedData: e.detail.encryptedData,
                     sessionKey: res.sessionKey
                 }).then(phoneNumber => {
-                    loginByPhoneNumberAndOpenId(phoneNumber, res.openid).then(() => {
+                    loginByPhoneNumberAndOpenId(phoneNumber, res.openId).then(() => {
                         Taro.switchTab({
                             url: '/pages/index/index'
                         })
                     })
-                    // registerByOpenIdAndPhone({ openId: res.openid, phoneNumber }).then(() => {
-
-                    //     loginByOpenId(res.openid).then(() => {
-                    //         getApplicationConfiguration().then(res => {
-                    //             Taro.switchTab({
-                    //                 url: '/pages/home/index'
-                    //             })
-                    //         })
-                    //     })
-                    // })
                 })
             })
 

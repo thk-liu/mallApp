@@ -1,7 +1,7 @@
 const options = {
     Tenant: null,
-    // SSO_AUTHORITY: "https://sso.xinwucanyin.com",
-    SSO_AUTHORITY: "http://localhost:29269",
+    SSO_AUTHORITY: "https://sso.xinwucanyin.com",
+    // SSO_AUTHORITY: "http://localhost:29269",
     SSO_CLIENT_ID: "authserver",
     SSO_CLIENT_ROOT_URL: "http://localhost:8000",
     SSO_SCOPE: "IdentityService AdministrationService SaasService",

@@ -11,7 +11,7 @@ type EncryptPhoneInput={
 }
 
 type RegisterByOpenIdAndPhoneInput={
-    openid:string;
+    openId:string;
     phoneNumber:string;
 }
 
